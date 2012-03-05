@@ -12,13 +12,17 @@ TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 
 TARGET_NO_BOOTLOADER := true
-TARGET_BOARD_PLATFORM := unknown
-TARGET_CPU_ABI := armeabi
-TARGET_BOOTLOADER_BOARD_NAME := galaxytab7p
+TARGET_NO_RADIOIMAGE := true
 
-BOARD_KERNEL_CMDLINE := no_console_suspend
+TARGET_BOARD_PLATFORM := smdkc210
+TARGET_BOOTLOADER_BOARD_NAME := GT-P6200
+
+# assert
+TARGET_OTA_ASSERT_DEVICE := GT-P6200
+
+BOARD_KERNEL_CMDLINE := console=ttySAC2,115200 consoleblank=0
 BOARD_KERNEL_BASE := 0x10000000
-BOARD_KERNEL_PAGESIZE := 00000800
+BOARD_KERNEL_PAGESIZE := 4096
 
 # fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00380000
