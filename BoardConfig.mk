@@ -17,47 +17,60 @@
 # This variable is set first, so it can be overridden
 # by BoardConfigVendor.mk
 USE_CAMERA_STUB := true
-
-# inherit from the proprietary version
--include vendor/samsung/galaxytab7p/BoardConfigVendor.mk
+BOARD_USES_GENERIC_AUDIO := false
+BOARD_USES_LIBSECRIL_STUB := true
 
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_SMP := true
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH_VARIANT_CPU := cortex-a9
+ARCH_ARM_HAVE_NEON := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
-TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
+EXYNOS4210_ENHANCEMENTS := true
+
+ifdef EXYNOS4210_ENHANCEMENTS
+COMMON_GLOBAL_CFLAGS += -DEXYNOS4210_ENHANCEMENTS
+COMMON_GLOBAL_CFLAGS += -DSURFACEFLINGER_FORCE_SCREEN_RELEASE
+endif
+
+TARGET_BOARD_PLATFORM := exynos4
+TARGET_SOC := exynos4210
+TARGET_BOOTLOADER_BOARD_NAME := smdk4210
 
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
-TARGET_BOARD_PLATFORM := smdkc210
-TARGET_BOOTLOADER_BOARD_NAME := GT-P6200
+TARGET_PROVIDES_INIT := true
+TARGET_PROVIDES_INIT_TARGET_RC := true
+TARGET_RECOVERY_INITRC := device/samsung/galaxys2/recovery.rc
 
-# assert
-TARGET_OTA_ASSERT_DEVICE := GT-P6200
-
-BOARD_KERNEL_CMDLINE := console=ttySAC2,115200 consoleblank=0
-BOARD_KERNEL_BASE := 0x10000000
+BOARD_NAND_PAGE_SIZE := 4096 -s 128
 BOARD_KERNEL_PAGESIZE := 4096
+BOARD_KERNEL_BASE := 0x40000000
+BOARD_KERNEL_CMDLINE := console=ttySAC2,115200 consoleblank=0
+TARGET_PREBUILT_KERNEL := device/samsung/galaxytab7p/zImage
 
-# fix this up by examining /proc/mtd on a running device
-BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00380000
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00480000
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x08c60000
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x105c0000
-BOARD_FLASH_BLOCK_SIZE := 131072
+# Filesystem
+# Note: flash block size appears to actually be 1024, but I'm leaving it
+# at 4096 because it works for galaxys2!  Check /proc/partitions for raw
+# flash block counts...
+TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 805306368
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 14122221568
+BOARD_FLASH_BLOCK_SIZE := 4096
 
 # Recovery
-TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/galaxytab7p/recovery/recovery_ui.c
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 
+# assert
+TARGET_OTA_ASSERT_DEVICE := GT-P6200
+
 TARGET_PREBUILT_KERNEL := device/samsung/galaxytab7p/zImage
 
-#BOARD_HAS_NO_SELECT_BUTTON := true
 # Use this flag if the board has a ext4 partition larger than 2gb
 BOARD_HAS_LARGE_FILESYSTEM := true
