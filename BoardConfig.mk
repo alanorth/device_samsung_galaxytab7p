@@ -38,7 +38,7 @@ BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 
-TARGET_PREBUILT_KERNEL := device/samsung/galaxytab7p/kernel
+TARGET_PREBUILT_KERNEL := device/samsung/galaxytab7p/zImage
 
 #BOARD_HAS_NO_SELECT_BUTTON := true
 # Use this flag if the board has a ext4 partition larger than 2gb
