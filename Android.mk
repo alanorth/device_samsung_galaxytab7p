@@ -17,6 +17,10 @@ LOCAL_PATH := $(call my-dir)
 
 ifeq ($(TARGET_DEVICE),galaxytab7p)
 
+include $(CLEAR_VARS)
+
+include $(BUILD_SYSTEM)/base_rules.mk
+
 ifneq ($(TARGET_SIMULATOR),true)
 include $(call all-makefiles-under,$(LOCAL_PATH))
 endif
