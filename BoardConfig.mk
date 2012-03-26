@@ -61,8 +61,39 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 805306368
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 14122221568
 BOARD_FLASH_BLOCK_SIZE := 4096
 
+# Releasetools
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/galaxys2/releasetools/galaxys2_ota_from_target_files
+TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/galaxys2/releasetools/galaxys2_img_from_target_files
+
+# Graphics
+BOARD_EGL_CFG := device/samsung/galaxytab7p/configs/egl.cfg
+USE_OPENGL_RENDERER := true
+
+# HWComposer
+BOARD_USES_HWCOMPOSER := true
+BOARD_USE_SECTVOUT := true
+BOARD_USES_FIMGAPI := true
+
+# OMX
+BOARD_HAVE_CODEC_SUPPORT := SAMSUNG_CODEC_SUPPORT
+COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CODEC_SUPPORT
+BOARD_NONBLOCK_MODE_PROCESS := true
+BOARD_USE_STOREMETADATA := true
+BOARD_USE_METADATABUFFERTYPE := true
+BOARD_USES_MFC_FPS := true
+
+# Audio
+BOARD_USE_YAMAHAPLAYER := true
+
+# Vold
+BOARD_VOLD_MAX_PARTITIONS := 12
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+BOARD_VOLD_DISC_HAS_MULTIPLE_MAJORS := true
+
 # Recovery
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/galaxytab7p/recovery/recovery_ui.c
+BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/galaxytab7p/recovery/graphics.c
+BOARD_UMS_LUNFILE := "/sys/class/android_usb/f_mass_storage/lun0/file"
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
@@ -70,7 +101,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 # assert
 TARGET_OTA_ASSERT_DEVICE := GT-P6200
 
-TARGET_PREBUILT_KERNEL := device/samsung/galaxytab7p/zImage
+# Use the non-open-source parts, if they're present
+-include vendor/samsung/galaxytab7p/BoardConfigVendor.mk
 
-# Use this flag if the board has a ext4 partition larger than 2gb
-BOARD_HAS_LARGE_FILESYSTEM := true
+BOARD_CUSTOM_BOOTIMG_MK := device/samsung/galaxytab7p/shbootimg.mk
