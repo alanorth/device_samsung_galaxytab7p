@@ -43,7 +43,7 @@ TARGET_NO_RADIOIMAGE := true
 
 TARGET_PROVIDES_INIT := true
 TARGET_PROVIDES_INIT_TARGET_RC := true
-TARGET_RECOVERY_INITRC := device/samsung/galaxys2/recovery.rc
+TARGET_RECOVERY_INITRC := device/samsung/galaxytab7p/recovery.rc
 
 BOARD_NAND_PAGE_SIZE := 4096 -s 128
 BOARD_KERNEL_PAGESIZE := 4096
