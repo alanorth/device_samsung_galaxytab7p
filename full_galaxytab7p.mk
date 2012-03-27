@@ -9,7 +9,7 @@ DEVICE_PACKAGE_OVERLAYS += device/samsung/galaxytab7p/overlay
 
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-	LOCAL_KERNEL := device/samsung/galaxytab7p/kernel
+	LOCAL_KERNEL := device/samsung/galaxytab7p/zImage
 else
 	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
